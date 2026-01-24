@@ -27,8 +27,7 @@ const configViewEngine = require('./config/viewengine');
 
 const webRoutes = require('./routes/web');
 
-// Get the client
-const mysql = require('mysql2');
+const connection = require('./config/database');
 
 // import express from 'express';//es modules
 
@@ -52,21 +51,12 @@ app.use('/v2', webRoutes);
 
 //test connection
 
-// Create the connection to database
-const connection = mysql.createConnection({
-  host: 'localhost',
-  port: 3307, //defualt 3306
-  user: 'root', //default password : empty
-  password: '123456',
-  database: 'hoidanit',
-});
-
 // A simple SELECT query
 connection.query (
     'select * from Users u',
     function (err, results, fields) {
      console.log(">>>results=", results); // results contains rows returned by server
-     console.log(">>>fields=", fields); // fields contains extra meta data about results, if available
+     //console.log(">>>fields=", fields); // fields contains extra meta data about results, if available
     }
 );
 
