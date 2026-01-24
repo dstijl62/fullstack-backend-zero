@@ -3,7 +3,7 @@
 const express = require('express');
 //const tenBien = require('ten-module');
 
-const {getHomepage, getABC, getHtml} = require('../controllers/homeController');
+const {getHomepage, getABC, getHtml, postCreateUser} = require('../controllers/homeController');
 
 const router = express.Router();
 
@@ -15,6 +15,9 @@ router.get('/', getHomepage);
 router.get('/abc', getABC);
 
 router.get('/html', getHtml);
+
+
+router.post('/create-user', postCreateUser);
 
 
 module.exports = router; //export default

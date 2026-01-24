@@ -1,5 +1,6 @@
 
 
+const { response } = require('express');
 const connection = require('../config/database');
 
 const getHomepage = (req, res) => {
@@ -25,6 +26,13 @@ const getHtml = (req, res) => {
   res.render('sample.ejs');
 }
 
+const postCreateUser = (req, res) => {
+    console.log(">>> req.body: ", req.body);
+    res.send('create a new user')
+
+}
+
 module.exports = {
-    getHomepage, getABC, getHtml
+    getHomepage, getABC, getHtml,
+    postCreateUser
 }

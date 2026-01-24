@@ -38,6 +38,9 @@ const port =  process.env.PORT || 8888; // khai bao port => hardcode . uat . pro
 const hostname = process.env.HOST_NAME;
 
 
+//config req.body
+ app.use(express.json()) // for json
+   app.use(express.urlencoded({ extended: true })) // for form data
 
 //config template engine
 configViewEngine(app);
@@ -46,8 +49,8 @@ configViewEngine(app);
 
 
 //Khai báo route
-app.use('/v1', webRoutes);
-app.use('/v2', webRoutes);
+app.use('/', webRoutes);
+// app.use('/v1', webRoutes);
 
 //test connection
 
