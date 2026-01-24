@@ -19,9 +19,17 @@ server.listen(port, hostname, () => {
 
 */
 
-const express = require('express')//common.js
-const path = require('path');
 require('dotenv').config();
+const express = require('express')//common.js
+// const path = require('path');
+
+const configViewEngine = require('./config/viewengine');
+
+const webRoutes = require('./routes/web');
+
+// Get the client
+const mysql = require('mysql2');
+
 // import express from 'express';//es modules
 
 console.log(">>> check env: ", process.env);
@@ -30,28 +38,39 @@ const app = express(); //app express
 const port =  process.env.PORT || 8888; // khai bao port => hardcode . uat . prod
 const hostname = process.env.HOST_NAME;
 
+
+
 //config template engine
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+configViewEngine(app);
 
 //config static file: image/css/js
-// app.use(express.static('public'))
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 //Khai báo route
-app.get('/', (req, res) => {
-  res.send('Hello World! & Nodemon')
-})
+app.use('/v1', webRoutes);
+app.use('/v2', webRoutes);
 
-app.get('/abc', (req, res) => {
-  res.send('Check abc!')
-})
+//test connection
 
-app.get('/html', (req, res) => {
-  // res.send('<h1>Hello World! Test html</h1>')
-  res.render('sample.ejs');
-})
+// Create the connection to database
+const connection = mysql.createConnection({
+  host: 'localhost',
+  port: 3307, //defualt 3306
+  user: 'root', //default password : empty
+  password: '123456',
+  database: 'hoidanit',
+});
 
-app.listen(port, () => {
+// A simple SELECT query
+connection.query (
+    'select * from Users u',
+    function (err, results, fields) {
+     console.log(">>>results=", results); // results contains rows returned by server
+     console.log(">>>fields=", fields); // fields contains extra meta data about results, if available
+    }
+);
+
+
+app.listen(port, hostname, () => {
   console.log(`Example app listening on port ${port}`)
 })
