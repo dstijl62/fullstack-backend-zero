@@ -5,7 +5,8 @@ const express = require('express');
 
 const {
     getHomepage, getABC, getHtml, 
-    getCreatePage, postCreateUser, getUpdatePage 
+    getCreatePage, postCreateUser, getUpdatePage,
+    postUpdateUser
 
 } = require('../controllers/homeController');
 
@@ -25,6 +26,8 @@ router.get('/update/:id', getUpdatePage);
 
 
 router.post('/create-user', postCreateUser);
+
+router.post('/update-user', postUpdateUser);
 
 
 module.exports = router; //export default
