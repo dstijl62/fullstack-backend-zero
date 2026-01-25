@@ -35,6 +35,12 @@ const getCreatePage = (req, res) => {
     res.render('create.ejs');
 }
 
+const getUpdatePage = (req, res) => {
+    const userId = req.params.id;
+    // console.log(">>> req.params:: ", req.params, userId);
+    res.render('edit.ejs');
+}
+
 const postCreateUser = async (req, res) => {
     console.log(">>> req.body: ", req.body);
     let email = req.body.email;
@@ -81,6 +87,7 @@ let [results, fields] = await connection.query(
 
 
 module.exports = {
-    getHomepage, getABC, getHtml, getCreatePage,
+    getHomepage, getABC, getHtml, 
+    getCreatePage, getUpdatePage,
     postCreateUser
 };
