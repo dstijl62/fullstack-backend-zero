@@ -25,31 +25,55 @@
     <th>Email</th>
     <th>Name</th>
     <th>City</th>
+    <th>Actions</th>
   </tr>
-  <tr>
-    <td>Peter</td>
-    <td>Griffin</td>
-    <td>$100</td>
-    <td>$100</td>
+ 
+  <!-- <% for (let i = 0; i < listUsers.length; i++) { %>
+     <tr>
+    <td>
+      <%= listUsers[i].ID %>
+    </td>
+    <td>
+       <%= listUsers[i].Email %>
+      </td>
+    <td>
+      <%= listUsers[i].Name %> 
+    </td>
+    <td>
+      <%= listUsers[i].City %> 
+    </td>
+    <td>
+      <button>Edit</button>
+      <button>Delete</button>
+    </td>
   </tr>
-  <tr>
-    <td>Lois</td>
-    <td>Griffin</td>
-    <td>$150</td>
-    <td>$150</td>
+
+  <% } %> -->
+  
+
+  <% listUsers.forEach(function(user, index) { %>
+       <tr>
+    <td>
+      <%= user.ID %>
+    <td>
+       <%= user.Email %>
+      </td>
+    <td>
+      <%= user.Name %> 
+    </td>
+    <td>
+      <%= user.City %> 
+    </td>
+    <td>
+      <button>Edit</button>
+      <button>Delete</button>
+    </td>
   </tr>
-  <tr>
-    <td>Joe</td>
-    <td>Swanson</td>
-    <td>$300</td>
-    <td>$300</td>
-  </tr>
-  <tr>
-    <td>Cleveland</td>
-    <td>Brown</td>
-    <td>$250</td>
-    <td>$250</td>
-  </tr>
+
+ <% }); %> 
+
+
+
 </table>
 
 

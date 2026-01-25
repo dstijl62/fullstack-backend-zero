@@ -2,9 +2,14 @@
 
 const { response } = require('express');
 const connection = require('../config/database');
+const {getAllUsers} = require('../services/CRUDService');
 
-const getHomepage = (req, res) => {
-    return res.render('home.ejs')
+const getHomepage = async (req, res) => {
+    // console.log(">>> check rows: ", results);
+
+    let results = await getAllUsers();
+
+    return res.render('home.ejs', {listUsers: results});
 
 };
 
@@ -38,7 +43,7 @@ const postCreateUser = async (req, res) => {
 
     // let {email, myname, City} = req.body;
 
-    console.log(">>> enmail =", email, "Name = ", name, "City = ", city);
+    console.log(">>> email =", email, "Name = ", name, "City = ", city);
 
     // Using placeholders
 
@@ -72,14 +77,6 @@ let [results, fields] = await connection.query(
 //         'select * from Users u'
 // );
 }
-
-
-
-
-
-
-
-
 
 
 
