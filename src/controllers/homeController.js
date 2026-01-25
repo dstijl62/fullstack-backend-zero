@@ -26,13 +26,64 @@ const getHtml = (req, res) => {
   res.render('sample.ejs');
 }
 
-const postCreateUser = (req, res) => {
-    console.log(">>> req.body: ", req.body);
-    res.send('create a new user')
-
+const getCreatePage = (req, res) => {
+    res.render('create.ejs');
 }
+
+const postCreateUser = async (req, res) => {
+    console.log(">>> req.body: ", req.body);
+    let email = req.body.email;
+    let name = req.body.myname;
+    let city = req.body.City;
+
+    // let {email, myname, City} = req.body;
+
+    console.log(">>> enmail =", email, "Name = ", name, "City = ", city);
+
+    // Using placeholders
+
+// connection.query(
+//   ` INSERT INTO 
+//                Users (email, name, city)
+//                VALUES (?, ?, ?)`,
+//   [email, myname, City],
+//   function (err, results) {
+//     res.send(' Created user succeed !')
+//   }
+// );
+
+let [results, fields] = await connection.query(
+   `INSERT INTO Users (email, name, city) VALUES (?, ?, ?) `,[email, name, city]
+    );
+
+    console.log(">>> check results: ", results);
+
+    res.send(' Created user succeed !')
+
+//     connection.query (
+//     'select * from Users u',
+//     function (err, results, fields) {
+//      console.log(">>>results=", results); // results contains rows returned by server
+//      //console.log(">>>fields=", fields); // fields contains extra meta data about results, if available
+//     }
+// )
+
+//     const [results, fields] = await connection.query (
+//         'select * from Users u'
+// );
+}
+
+
+
+
+
+
+
+
+
+
 
 module.exports = {
-    getHomepage, getABC, getHtml,
+    getHomepage, getABC, getHtml, getCreatePage,
     postCreateUser
-}
+};

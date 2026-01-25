@@ -3,7 +3,7 @@
 const express = require('express');
 //const tenBien = require('ten-module');
 
-const {getHomepage, getABC, getHtml, postCreateUser} = require('../controllers/homeController');
+const {getHomepage, getABC, getHtml, getCreatePage, postCreateUser} = require('../controllers/homeController');
 
 const router = express.Router();
 
@@ -15,6 +15,8 @@ router.get('/', getHomepage);
 router.get('/abc', getABC);
 
 router.get('/html', getHtml);
+
+router.get('/create', getCreatePage);
 
 
 router.post('/create-user', postCreateUser);
