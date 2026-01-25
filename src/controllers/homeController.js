@@ -2,7 +2,10 @@
 
 const { response } = require('express');
 const connection = require('../config/database');
-const {getAllUsers , getUserByID, updateUserById} = require('../services/CRUDService');
+const {   getAllUsers , getUserByID, 
+          updateUserById, deleteUserById
+      } 
+      = require('../services/CRUDService');
 
 const getHomepage = async (req, res) => {
     // console.log(">>> check rows: ", results);
@@ -113,8 +116,13 @@ const postDeleteUser = async (req, res) => {
 
 }
 
-const postHandleRemoveUser = (req, res) => {
-    res.send('ok deleted')
+const postHandleRemoveUser = async (req, res) => {
+
+    const id = req.body.userId;
+    await deleteUserById(id);
+
+    // res.send('ok deleted')
+    res.redirect('/');
 }
 
 
